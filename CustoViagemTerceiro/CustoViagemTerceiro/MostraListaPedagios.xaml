@@ -10,9 +10,54 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            
+            <ListView x:Name="lst_lista_pedagios">
+                <ListView.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0" Text="Nº:" />
+                        <Label Grid.Column="1" Grid.Row="0" Text="Localização:" />
+                        <Label Grid.Column="2" Grid.Row="0" Text="Valor:" />
+                    </Grid>
+                </ListView.Header>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Remover" Clicked="MenuItem_Clicked"></MenuItem>
+                            </ViewCell.ContextActions>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding NumeroPedagio }" />
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Localizacao }" />
+                                <Label Grid.Column="2" Grid.Row="0" Text="{Binding Valor, StringFormat='{}{0:c}'}" />
+                            </Grid>
+                            
+                        </ViewCell>                        
+                    </DataTemplate>                    
+                </ListView.ItemTemplate>                
+            </ListView>
+            
+            
         </StackLayout>
     </ContentPage.Content>
     

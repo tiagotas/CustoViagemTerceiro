@@ -79,7 +79,8 @@
                        Placeholder="R$ "
                        Keyboard="Numeric"
                        HorizontalOptions="FillAndExpand" />
-                <Button Text="Add" />
+                
+                <Button Text="Add" Clicked="Button_Add_Pedagio_Clicked" />                
             </StackLayout>
 
             <StackLayout Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" 

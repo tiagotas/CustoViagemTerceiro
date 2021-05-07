@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
+using CustoViagemTerceiro.Model;
+
 namespace CustoViagemTerceiro
 {
     public partial class MainPage : ContentPage
@@ -24,7 +26,6 @@ namespace CustoViagemTerceiro
             } catch(Exception ex)
             {
                 DisplayAlert("Oooops", ex.Message, "OK");
-
             }
         }
 
@@ -48,6 +49,35 @@ namespace CustoViagemTerceiro
             catch (Exception ex)
             {
                 await DisplayAlert("Oooops", ex.Message, "OK");
+            }
+        }
+
+        private void Button_Add_Pedagio_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                // Acessando as propriedades da classe App.
+                App PropriedadesApp = (App)Application.Current;
+
+
+                // Criando o objeto pedágio que será adicionado à lista.
+                Pedagio p = new Pedagio();
+                p.NumeroPedagio = PropriedadesApp.lista_pedagios.Count + 1;
+                p.Localizacao = txt_localizacao.Text;
+                p.Valor = Convert.ToDouble(txt_valor_pedagio.Text);
+
+
+                // Adicionando o pedágio recém criado à lista de pedágios
+                PropriedadesApp.lista_pedagios.Add(p);
+
+                DisplayAlert("Deu certo!", "Pedágio Adicionado na Lista", "OK");
+
+                txt_localizacao.Text = "";
+                txt_valor_pedagio.Text = "";
+
+            } catch (Exception ex)
+            {
+                DisplayAlert("Oooops", ex.Message, "OK");
             }
         }
     }
