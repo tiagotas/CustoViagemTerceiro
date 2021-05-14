@@ -89,9 +89,11 @@
                          HorizontalOptions="CenterAndExpand">
                 
                 <Button Text="Calcular Custo da Viagem"
+                        Clicked="Button_Calcular_Clicked"
                         Padding="10" />
                 
-                <Button Text="Limpar" Clicked="Button_Limpar_Clicked" />
+                <Button Text="Limpar" 
+                        Clicked="Button_Limpar_Clicked" />
                 
             </StackLayout>
 

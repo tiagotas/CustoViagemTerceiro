@@ -12,9 +12,13 @@ namespace CustoViagemTerceiro
 {
     public partial class MainPage : ContentPage
     {
+        App PropriedadesApp;
+
         public MainPage()
         {
             InitializeComponent();
+
+            PropriedadesApp = (App)Application.Current;
         }
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
@@ -56,10 +60,6 @@ namespace CustoViagemTerceiro
         {
             try
             {
-                // Acessando as propriedades da classe App.
-                App PropriedadesApp = (App)Application.Current;
-
-
                 // Criando o objeto pedágio que será adicionado à lista.
                 Pedagio p = new Pedagio();
                 p.NumeroPedagio = PropriedadesApp.lista_pedagios.Count + 1;
@@ -78,6 +78,40 @@ namespace CustoViagemTerceiro
             } catch (Exception ex)
             {
                 DisplayAlert("Oooops", ex.Message, "OK");
+            }
+        }
+
+        private void Button_Calcular_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                double distancia = Convert.ToDouble(txt_distancia.Text);
+                double consumo = Convert.ToDouble(txt_consumo.Text);
+                double preco_combustivel = Convert.ToDouble(txt_valor_combustivel.Text);
+
+                // Definindo o valor do gasto com combustivel.
+                double gasto_combustivel = (distancia / consumo) * preco_combustivel;
+
+                // Somando o valor de todos os pedágios com Sum (biblioteca LINQ).
+                double gasto_pedagio = PropriedadesApp.lista_pedagios.Sum(i => i.Valor);
+
+                // Soma do custo total da viagem.
+                double gasto_total = gasto_combustivel + gasto_pedagio;
+
+                string msg = string.Format(
+                    "Você irá gastar na viagem entre {0} até {1}: \n - Custará {2} \n - Combustível {3} \n - Pedágio {4} ",
+                    txt_origem.Text,
+                    txt_destino.Text,
+                    gasto_total.ToString("C"),
+                    gasto_combustivel.ToString("C"),
+                    gasto_pedagio.ToString("C")
+                 );
+
+                DisplayAlert("Custo da Viagem", msg, "OK");
+
+            } catch (Exception ex)
+            {
+                DisplayAlert("Ooops!", ex.Message, "OK");
             }
         }
     }
